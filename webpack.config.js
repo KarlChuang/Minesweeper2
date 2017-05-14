@@ -1,12 +1,12 @@
-var webpack = require("webpack");
-var path = require('path');
+const webpack = require('webpack');
+const path = require('path');
 
 module.exports = {
   entry: './src/index.js',
 
   output: {
     path: path.resolve(__dirname, './dist'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
   },
 
   module: {
@@ -37,5 +37,10 @@ module.exports = {
 
   plugins: [
     new webpack.optimize.UglifyJsPlugin(),
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('production'),
+      },
+    }),
   ],
 };
