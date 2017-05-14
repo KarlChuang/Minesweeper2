@@ -9,21 +9,23 @@ class Time extends Component {
     };
   }
   componentWillMount() {
+    const Props = this.props;
     this.setState({
-      counter: this.props.counter,
+      counter: Props.counter,
     });
     this.refreshTimer = this.refreshTimer.bind(this);
   }
   componentDidUpdate() {
+    const Props = this.props;
     if (this.timerID === undefined) {
       this.timerID = setInterval(
         () => this.tick(this.state, this.props),
       1000);
     }
-    if (this.timerID === null && this.props.start) {
+    if (this.timerID === null && Props.start) {
       this.refreshTimer();
     }
-    if (!this.props.start) {
+    if (!Props.start) {
       clearInterval(this.timerID);
       this.timerID = null;
     }

@@ -4,6 +4,14 @@ import './Time.css';
 import Block from './block';
 import Time from './Time';
 
+const handleStop = (count) => {
+  if (count === 400) {
+    if (confirm('Winnnnn!\nDo you want to start a new game?')) {
+      location.reload();
+    }
+  }
+};
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -25,7 +33,6 @@ class App extends Component {
     this.handleClick = this.handleClick.bind(this);
     this.firstClick = this.firstClick.bind(this);
     this.ArrayMapping = this.ArrayMapping.bind(this);
-    this.handleStop = this.handleStop.bind(this);
     this.handleDifficultyChange = this.handleDifficultyChange.bind(this);
     this.handleContextMenu = this.handleContextMenu.bind(this);
   }
@@ -116,7 +123,7 @@ class App extends Component {
       start: newStart,
       bombNumsRemain: newBombNumsRemain,
     });
-    this.handleStop(newCount);
+    handleStop(newCount);
     return newCount;
   }
   handleContextMenu(numX, numY, e) {
@@ -143,7 +150,7 @@ class App extends Component {
         count: newCount,
         bombNumsRemain: newBombNumsRemain,
       });
-      this.handleStop(newCount);
+      handleStop(newCount);
     }
   }
   handleDifficultyChange(e) {
@@ -169,13 +176,6 @@ class App extends Component {
       start: false,
       difficultyNum: newDifficultyNum,
     });
-  }
-  handleStop(count) {
-    if (count === 400) {
-      if (confirm('Winnnnn!\nDo you want to start a new game?')) {
-        location.reload();
-      }
-    }
   }
   ArrayMapping(inputArray, numY) {
     const newArray = [];
