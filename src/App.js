@@ -85,9 +85,13 @@ class App extends Component {
       TempArray[numY][numX].click = true;
       newCount += 1;
       if (TempArray[numY][numX].state === 'bomp') {
+        TempArray[numY][numX].state = 'bompClick';
         for (let i = 0; i < 20; i += 1) {
           for (let j = 0; j < 20; j += 1) {
-            TempArray[numY][numX].state = 'bompClick';
+            const test = TempArray[i][j];
+            if (test.click === false && test.state === 'bomp' && test.flag === false) {
+              TempArray[i][j].state = 'bompClick';
+            }
             TempArray[i][j].click = true;
           }
         }
