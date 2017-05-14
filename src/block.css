@@ -1,0 +1,39 @@
+.Block, .BlockDown, .BlockDownFalse {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: black;
+}
+
+.Block {
+  background-color: rgba(255, 255, 255, 0.4);
+  transition: background-color 0.3s;
+}
+
+.Block:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  transition: background-color 0.3s;
+}
+
+.BlockDown {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.BlockDownFalse {
+  background-color: rgba(255, 0, 0, 0.4);
+}
+
+img {
+  width: 31px;
+  height: 31px;
+}
+
+.BlockType {
+  text-align: center;
+  font-size: 29px;
+  color: rgba(210, 210, 210, 0.69);
+  width: 30px;
+  height: 30px;
+}

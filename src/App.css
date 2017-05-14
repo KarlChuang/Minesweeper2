@@ -1,0 +1,36 @@
+.App {
+  min-width: 984px;
+}
+
+.BlockLine {
+  margin-left: 100px;
+  height: 31px;
+  min-width:660px;
+}
+
+.Title {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.64);
+  background-color: rgba(245, 245, 220, 0.24);
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.div1 {
+  display: inline-block;
+}
+
+.div2 {
+  display: inline-block;
+  float: right;
+  margin-right: 20px;
+  background-color: rgba(255, 255, 255, 0.3);
+  width: 200px;
+  height: 160px;
+}
+
+select {
+  margin-left: 10px;
+  background-color: rgba(0, 0, 0, 0);
+  font-size: 15px;
+}
