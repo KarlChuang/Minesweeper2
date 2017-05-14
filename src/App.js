@@ -7,7 +7,17 @@ import Time from './Time';
 class App extends Component {
   render() {
     return (
-      
+      <div>
+        <Block
+          state="bomp"
+          click={true}
+          flag={false}
+          key="2" numx={1} numy={1}
+          onClick={() => { console.log('Click'); }}
+          onContextMenu={() => { console.log('RightClick'); }}
+        />
+        <Time counter={0} start={true} />
+      </div>
     );
   }
 

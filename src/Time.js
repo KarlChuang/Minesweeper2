@@ -2,23 +2,17 @@ import React, { Component } from 'react';
 import './Time.css';
 
 class Time extends Component {
-  static counterRefresh() {
-    this.setState({
-      counter: 0,
-    });
-    this.timerID = setInterval(() => this.tick(), 1000);
-  }
   constructor(props) {
     super(props);
     this.state = {
       counter: 0,
     };
-    this.counterRefresh = this.counterRefresh.bind(this);
   }
   componentWillMount() {
     this.setState({
       counter: this.props.counter,
     });
+    this.refreshTimer = this.refreshTimer.bind(this);
   }
   componentDidUpdate() {
     if (this.timerID === undefined) {
@@ -27,7 +21,7 @@ class Time extends Component {
       1000);
     }
     if (this.timerID === null && this.props.start) {
-      this.counterRefresh();
+      this.refreshTimer();
     }
     if (!this.props.start) {
       clearInterval(this.timerID);
@@ -38,6 +32,12 @@ class Time extends Component {
     this.setState(prev => ({
       counter: prev.counter + 1,
     }));
+  }
+  refreshTimer() {
+    this.setState({
+      counter: 0,
+    });
+    this.timerID = setInterval(() => this.tick(), 1000);
   }
   render() {
     return (
