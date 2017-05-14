@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint .",
+    "lint": "eslint ./src",
     "build": "webpack",
     "watch": "npm run build -- --watch"
   },
@@ -31,7 +31,7 @@
     "css-loader": "^0.28.1",
     "eslint-config-airbnb": "^14.1.0",
     "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-jsx-a11y": "^5.0.1",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^7.0.1",
     "style-loader": "^0.17.0",
     "webpack": "^2.5.1"
