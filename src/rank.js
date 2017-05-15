@@ -52,12 +52,15 @@ const ArrayMapping = (data) => {
 };
 
 class Rank extends Component {
+  /*
   constructor() {
     super();
     this.state = {
       Data: [],
     };
   }
+  */
+  /*
   componentWillMount() {
     fetch('/api/getData').then(
       response => response.json(),
@@ -67,8 +70,9 @@ class Rank extends Component {
       });
     });
   }
+  */
   render() {
-    const RenderData = ArrayMapping(this.state.Data);
+    const RenderData = ArrayMapping(this.props.data);
     return (
       <div>
         <div className="Type">

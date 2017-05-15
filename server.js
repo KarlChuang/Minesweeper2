@@ -51,6 +51,10 @@ app.use('/api/getData', (req, res) => {
   res.json(TempRank);
 });
 
+app.post('/api/sendData', (req) => {
+  TempRank.Data.push(JSON.parse(JSON.stringify(req.body)));
+});
+
 app.listen(3000, () => {
   console.log('App listening on port 3000');
 });

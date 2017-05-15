@@ -1,7 +1,3 @@
-.App {
-  // min-width: 984px;
-}
-
 .BlockLine {
   margin-left: 100px;
   height: 31px;
@@ -30,7 +26,7 @@
     margin-right: 10%;
     margin-left: 10%;
     width: 80%;
-    margin-bottom: 30px;
+    padding-bottom: 20px;
   }
 }
 
@@ -38,6 +34,7 @@
   .BlockLine {
     width: 100%;
     margin-left: 0;
+    height: 31px;
     min-width: 0;
   }
   .div2 {
@@ -46,7 +43,6 @@
     margin-right: 0;
     margin-left: 0;
     width: 100%;
-    margin-bottom: 30px;
   }
 }
 
@@ -62,4 +58,32 @@ select {
   margin-left: 10px;
   background-color: rgba(0, 0, 0, 0);
   font-size: 15px;
+}
+
+.inputBlock {
+  text-align: center;
+  background-color: rgba(0,0,0,0);
+  border: 1px;
+  border-color: rgb(166,166,166);
+  margin-top: 10px;
+  height: 15px;
+  border-radius: 3px;
+  font-size: 15px;
+  width: 120px;
+  border-style: solid;
+}
+
+.Restart {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.RestartButton {
+  font-size: 15px;
+  background-color: rgba(0,0,0,0.4);
+  border-radius: 5px;
+  border: 1px;
+  color: white;
+  border-style: solid;
+  width: 80%;
 }

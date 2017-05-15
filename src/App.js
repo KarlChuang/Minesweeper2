@@ -5,14 +5,6 @@ import Block from './block';
 import Time from './Time';
 import Rank from './rank';
 
-const handleStop = (count) => {
-  if (count === 400) {
-    if (confirm('Winnnnn!\nDo you want to start a new game?')) {
-      location.reload();
-    }
-  }
-};
-
 class App extends Component {
   constructor(props) {
     super(props);
@@ -30,12 +22,80 @@ class App extends Component {
       start: false,
       difficultyNum: 8,
       bombNumsRemain: 0,
+      Data: [],
     };
     this.handleClick = this.handleClick.bind(this);
     this.firstClick = this.firstClick.bind(this);
     this.ArrayMapping = this.ArrayMapping.bind(this);
     this.handleDifficultyChange = this.handleDifficultyChange.bind(this);
     this.handleContextMenu = this.handleContextMenu.bind(this);
+    this.refreshTimer = this.refreshTimer.bind(this);
+    this.tick = this.tick.bind(this);
+    this.handleStop = this.handleStop.bind(this);
+    this.handleRestartClick = this.handleRestartClick.bind(this);
+  }
+  componentWillMount() {
+    fetch('/api/getData').then(
+      response => response.json(),
+    ).then((json) => {
+      this.setState({
+        Data: json.Data,
+      });
+    });
+  }
+  componentDidUpdate() {
+    if (this.timerID === undefined) {
+      this.timerID = setInterval(
+        () => this.tick(),
+      1000);
+    }
+    if (this.timerID === null && this.state.start) {
+      this.refreshTimer();
+    }
+    if (!this.state.start) {
+      clearInterval(this.timerID);
+      this.timerID = null;
+    }
+  }
+  tick() {
+    this.setState(prev => ({
+      counter: prev.counter + 1,
+    }));
+  }
+  refreshTimer() {
+    this.setState({
+      counter: 0,
+    });
+    this.timerID = setInterval(() => this.tick(), 1000);
+  }
+  handleStop(count) {
+    if (count === 400) {
+      const playerName = prompt('Winnnnn! Enter your Name!');
+      const newData = this.state.Data;
+      let newMode = 1;
+      if (this.state.difficultyNum === 6) {
+        newMode = 2;
+      } else if (this.state.difficultyNum === 4) {
+        newMode = 3;
+      }
+      const newPlayerData = {
+        name: playerName,
+        time: this.state.counter,
+        mode: newMode,
+      };
+      newData.push(newPlayerData);
+      this.setState({
+        Data: newData,
+      });
+      fetch('/api/sendData', {
+        method: 'post',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newPlayerData),
+      });
+    }
   }
   firstClick(numX, numY, TempArrayIn) {
     const TempArray = TempArrayIn;
@@ -79,7 +139,7 @@ class App extends Component {
   handleClick(numX, numY, e, count) {
     let TempArray = this.state.BlockArray;
     let newBombNumsRemain = this.state.bombNumsRemain;
-    let newStart = false;
+    let newStart = this.state.start;
     let newCount = count;
     if (TempArray[numY][numX].click === false) {
       newStart = true;
@@ -124,7 +184,7 @@ class App extends Component {
       start: newStart,
       bombNumsRemain: newBombNumsRemain,
     });
-    handleStop(newCount);
+    this.handleStop(newCount);
     return newCount;
   }
   handleContextMenu(numX, numY, e) {
@@ -151,7 +211,7 @@ class App extends Component {
         count: newCount,
         bombNumsRemain: newBombNumsRemain,
       });
-      handleStop(newCount);
+      this.handleStop(newCount);
     }
   }
   handleDifficultyChange(e) {
@@ -178,6 +238,9 @@ class App extends Component {
       difficultyNum: newDifficultyNum,
     });
   }
+  handleRestartClick() {
+    location.reload();
+  }
   ArrayMapping(inputArray, numY) {
     const newArray = [];
     for (let i = 0; i < 20; i += 1) {
@@ -194,7 +257,6 @@ class App extends Component {
     }
     return newArray;
   }
-
   render() {
     const line = [];
     for (let i = 0; i < 20; i += 1) {
@@ -226,6 +288,8 @@ class App extends Component {
           <div className="BlockLine">{line[19]}</div>
         </div>
         <div className="div2">
+          <div className="Restart"><button className="RestartButton" onClick={this.handleRestartClick}>Restart</button></div>
+          <hr color="black" size="1" width="90%" />
           <div className="Time" style={{ marginTop: '5px' }}>
             Difficulty:
             <select onChange={this.handleDifficultyChange} name="Difficulty">
@@ -235,10 +299,10 @@ class App extends Component {
             </select>
           </div>
           <hr color="black" size="1" width="90%" />
-          <Time counter={this.state.counter} start={this.state.start} />
+          <Time counter={this.state.counter} />
           <div className="Time">Bomb Remain: {this.state.bombNumsRemain}</div>
           <hr color="black" size="1" width="90%" />
-          <Rank />
+          <Rank data={this.state.Data} />
         </div>
       </div>
     );
