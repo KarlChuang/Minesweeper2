@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
+import fetch from 'isomorphic-fetch';
 import './App.css';
 import './Time.css';
 import Block from './block';
 import Time from './Time';
 import Rank from './rank';
+
+
+const handleRestartClick = () => {
+  location.reload();
+};
 
 class App extends Component {
   constructor(props) {
@@ -32,7 +38,6 @@ class App extends Component {
     this.refreshTimer = this.refreshTimer.bind(this);
     this.tick = this.tick.bind(this);
     this.handleStop = this.handleStop.bind(this);
-    this.handleRestartClick = this.handleRestartClick.bind(this);
   }
   componentWillMount() {
     fetch('/api/getData').then(
@@ -86,11 +91,11 @@ class App extends Component {
       newData.push(newPlayerData);
       this.setState({
         Data: newData,
+        start: false,
       });
       fetch('/api/sendData', {
         method: 'post',
         headers: {
-          'Accept': 'application/json',
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(newPlayerData),
@@ -238,9 +243,6 @@ class App extends Component {
       difficultyNum: newDifficultyNum,
     });
   }
-  handleRestartClick() {
-    location.reload();
-  }
   ArrayMapping(inputArray, numY) {
     const newArray = [];
     for (let i = 0; i < 20; i += 1) {
@@ -288,7 +290,9 @@ class App extends Component {
           <div className="BlockLine">{line[19]}</div>
         </div>
         <div className="div2">
-          <div className="Restart"><button className="RestartButton" onClick={this.handleRestartClick}>Restart</button></div>
+          <div className="Restart">
+            <button className="RestartButton" onClick={handleRestartClick}>Restart</button>
+          </div>
           <hr color="black" size="1" width="90%" />
           <div className="Time" style={{ marginTop: '5px' }}>
             Difficulty:

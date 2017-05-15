@@ -1,5 +1,4 @@
-import fetch from 'isomorphic-fetch';
-import React, { Component } from 'react';
+import React from 'react';
 import './rank.css';
 
 const ArrayMapping = (data) => {
@@ -51,45 +50,25 @@ const ArrayMapping = (data) => {
   });
 };
 
-class Rank extends Component {
-  /*
-  constructor() {
-    super();
-    this.state = {
-      Data: [],
-    };
-  }
-  */
-  /*
-  componentWillMount() {
-    fetch('/api/getData').then(
-      response => response.json(),
-    ).then((json) => {
-      this.setState({
-        Data: json.Data,
-      });
-    });
-  }
-  */
-  render() {
-    const RenderData = ArrayMapping(this.props.data);
-    return (
-      <div>
-        <div className="Type">
-          Easy
-          {RenderData.easy}
-        </div>
-        <div className="Type">
-          Medium
-          {RenderData.medium}
-        </div>
-        <div className="Type">
-          Hard
-          {RenderData.hard}
-        </div>
+const Rank = (props) => {
+  const Props = props;
+  const RenderData = ArrayMapping(Props.data);
+  return (
+    <div>
+      <div className="Type">
+        Easy
+        {RenderData.easy}
       </div>
-    );
-  }
-}
+      <div className="Type">
+        Medium
+        {RenderData.medium}
+      </div>
+      <div className="Type">
+        Hard
+        {RenderData.hard}
+      </div>
+    </div>
+  );
+};
 
 export default Rank;
