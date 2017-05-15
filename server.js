@@ -5,41 +5,10 @@ const bodyParser = require('body-parser');
 const app = express();
 
 const rank = {
-  Data: [
-    {
-      name: 'Karl',
-      time: 34,
-      mode: 1,
-    },
-    {
-      name: 'Leo',
-      time: 38,
-      mode: 2,
-    },
-    {
-      name: 'Roger',
-      time: 100,
-      mode: 3,
-    },
-    {
-      name: 'Roger',
-      time: 100,
-      mode: 3,
-    },
-    {
-      name: 'Roger',
-      time: 103,
-      mode: 1,
-    },
-    {
-      name: 'Roger',
-      time: 120,
-      mode: 2,
-    },
-  ],
+  Data: [],
 };
 
-let TempRank = rank;
+const TempRank = rank;
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'dist')));
