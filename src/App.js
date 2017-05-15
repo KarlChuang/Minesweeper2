@@ -3,6 +3,7 @@ import './App.css';
 import './Time.css';
 import Block from './block';
 import Time from './Time';
+import Rank from './rank';
 
 const handleStop = (count) => {
   if (count === 400) {
@@ -237,6 +238,7 @@ class App extends Component {
           <Time counter={this.state.counter} start={this.state.start} />
           <div className="Time">Bomb Remain: {this.state.bombNumsRemain}</div>
           <hr color="black" size="1" width="90%" />
+          <Rank />
         </div>
       </div>
     );
