@@ -69,7 +69,6 @@ class Rank extends Component {
   }
   render() {
     const RenderData = ArrayMapping(this.state.Data);
-    console.log(this.state.Data);
     return (
       <div>
         <div className="Type">

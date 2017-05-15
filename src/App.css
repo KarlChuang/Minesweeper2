@@ -1,19 +1,11 @@
 .App {
-  min-width: 984px;
+  // min-width: 984px;
 }
 
 .BlockLine {
   margin-left: 100px;
   height: 31px;
-  min-width:660px;
-}
-
-.Title {
-  text-align: center;
-  color: rgba(255, 255, 255, 0.64);
-  background-color: rgba(245, 245, 220, 0.24);
-  padding-top: 10px;
-  padding-bottom: 10px;
+  width: 620px;
 }
 
 .div1 {
@@ -26,6 +18,44 @@
   margin-right: 20px;
   background-color: rgba(255, 255, 255, 0.3);
   width: 200px;
+}
+
+@media (max-width: 960px) {
+  .div1 {
+    display: block;
+  }
+  .div2 {
+    display: block;
+    margin-top: 20px;
+    margin-right: 10%;
+    margin-left: 10%;
+    width: 80%;
+    margin-bottom: 30px;
+  }
+}
+
+@media (max-width: 720px) {
+  .BlockLine {
+    width: 100%;
+    margin-left: 0;
+    min-width: 0;
+  }
+  .div2 {
+    display: block;
+    margin-top: 0;
+    margin-right: 0;
+    margin-left: 0;
+    width: 100%;
+    margin-bottom: 30px;
+  }
+}
+
+.Title {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.64);
+  background-color: rgba(245, 245, 220, 0.24);
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 select {
