@@ -6,11 +6,6 @@ import Block from './block';
 import Time from './Time';
 import Rank from './rank';
 
-
-const handleRestartClick = () => {
-  location.reload();
-};
-
 class App extends Component {
   constructor(props) {
     super(props);
@@ -29,6 +24,7 @@ class App extends Component {
       difficultyNum: 8,
       bombNumsRemain: 0,
       Data: [],
+      countTick: 0,
     };
     this.handleClick = this.handleClick.bind(this);
     this.firstClick = this.firstClick.bind(this);
@@ -38,6 +34,9 @@ class App extends Component {
     this.refreshTimer = this.refreshTimer.bind(this);
     this.tick = this.tick.bind(this);
     this.handleStop = this.handleStop.bind(this);
+    this.handleRestartClick = this.handleRestartClick.bind(this);
+    this.handleMouseDown = this.handleMouseDown.bind(this);
+    this.handleMouseUp = this.handleMouseUp.bind(this);
   }
   componentWillMount() {
     fetch('/api/getData').then(
@@ -61,6 +60,22 @@ class App extends Component {
       clearInterval(this.timerID);
       this.timerID = null;
     }
+  }
+  handleRestartClick() {
+    const TempArray = [];
+    for (let i = 0; i < 20; i += 1) {
+      TempArray.push([]);
+      for (let j = 0; j < 20; j += 1) {
+        TempArray[i].push({ state: '0', click: false, flag: false });
+      }
+    }
+    this.setState({
+      BlockArray: TempArray,
+      count: 0,
+      counter: 0,
+      start: false,
+      bombNumsRemain: 0,
+    });
   }
   tick() {
     this.setState(prev => ({
@@ -243,6 +258,21 @@ class App extends Component {
       difficultyNum: newDifficultyNum,
     });
   }
+  handleMouseDown() {
+    const MouseCount = this.state.counter;
+    this.setState({
+      countTick: MouseCount,
+    });
+  }
+  handleMouseUp(numX, numY, e) {
+    const MouseCount = this.state.counter - this.state.countTick;
+    if (MouseCount >= 1) {
+      this.handleContextMenu(numX, numY, e);
+    }
+    this.setState({
+      countTick: 0,
+    });
+  }
   ArrayMapping(inputArray, numY) {
     const newArray = [];
     for (let i = 0; i < 20; i += 1) {
@@ -254,6 +284,8 @@ class App extends Component {
           key={(i.toString())} numx={i} numy={numY}
           onClick={(numX, numY2, e) => this.handleClick(numX, numY2, e, this.state.count)}
           onContextMenu={this.handleContextMenu}
+          onMouseDown={this.handleMouseDown}
+          onMouseUp={this.handleMouseUp}
         />
       ));
     }
@@ -291,7 +323,7 @@ class App extends Component {
         </div>
         <div className="div2">
           <div className="Restart">
-            <button className="RestartButton" onClick={handleRestartClick}>Restart</button>
+            <button className="RestartButton" onClick={this.handleRestartClick}>Restart</button>
           </div>
           <hr color="black" size="1" width="90%" />
           <div className="Time" style={{ marginTop: '5px' }}>
