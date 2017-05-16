@@ -45,8 +45,8 @@ const Block = (props) => {
       className={name}
       onClick={e => handleClick(numX, numY, e)}
       onContextMenu={e => handleContextMenu(numX, numY, e)}
-      onMouseDown={Props.onMouseDown}
-      onMouseUp={e => Props.onMouseUp(numX, numY, e)}
+      onMouseUp={Props.onMouseUp}
+      onMouseDown={e => Props.onMouseDown(numX, numY, e)}
     >
       {content}
     </button>

@@ -258,17 +258,20 @@ class App extends Component {
       difficultyNum: newDifficultyNum,
     });
   }
-  handleMouseDown() {
-    const MouseCount = this.state.counter;
-    this.setState({
-      countTick: MouseCount,
-    });
+  handleMouseDown(numX, numY, e) {
+    const MouseCounting = () => {
+      this.setState(prev => ({
+        countTick: prev.countTick + 1,
+      }));
+      if (this.state.countTick > 1) {
+        this.handleContextMenu(numX, numY, e);
+        this.handleMouseUp();
+      }
+    };
+    this.timerID3 = setInterval(MouseCounting, 250);
   }
-  handleMouseUp(numX, numY, e) {
-    const MouseCount = this.state.counter - this.state.countTick;
-    if (MouseCount >= 1) {
-      this.handleContextMenu(numX, numY, e);
-    }
+  handleMouseUp() {
+    clearInterval(this.timerID3);
     this.setState({
       countTick: 0,
     });
