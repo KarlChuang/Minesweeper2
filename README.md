@@ -1,6 +1,6 @@
 # Minesweeper2
 
-> [Demo Link](https://my-project-vjcxaxntjb.now.sh/)
+> [Demo Link](https://my-project-nscwvxuxkt.now.sh)
 
 ## Download it
 

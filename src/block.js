@@ -47,6 +47,10 @@ const Block = (props) => {
       onContextMenu={e => handleContextMenu(numX, numY, e)}
       onMouseUp={Props.onMouseUp}
       onMouseDown={e => Props.onMouseDown(numX, numY, e)}
+      onTouchStart={e => Props.onMouseDown(numX, numY, e)}
+      onTouchEnd={Props.onMouseUp}
+      onTouchMove={(e) => { e.preventDefault(); }}
+      onTouchCancel={(e) => { e.preventDefault(); }}
     >
       {content}
     </button>
